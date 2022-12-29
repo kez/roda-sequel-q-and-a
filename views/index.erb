@@ -1,0 +1,33 @@
+<h2>Recent Questions</h2>
+
+<% @recent_questions.each do |question| %>
+  <%== partial 'questions/question_in_list', locals: {question:} %>
+<% end %>
+
+
+<hr>
+
+
+<h3>Ask a question</h3>
+<% unless logged_in? %>
+  <p>Please note you will need to be <a href="/users/login">logged in</a> before asking a question.</p>
+<% else %>
+  
+  <p>Use the form below to ask a question so others can offer answers.</p>
+  <%# @todo extract this to a partial %>
+  <form action="/questions" method="POST">
+    <%== csrf_tag('/questions') %>
+    <div>
+      <label for="title">Title</label>
+      <input type="text" name="question[title]" id="title" placeholder="The title of your question" required />
+    </div>
+
+    <div>
+      <label for="body">Body</label>
+      <textarea  name="question[body]" id="body" placeholder="The title of your question" required></textarea>
+    </div>
+
+    <button type="submit">Ask Question</button>
+  </form>
+
+<% end %>

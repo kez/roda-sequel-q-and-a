@@ -1,0 +1,10 @@
+<p>These are dummy accounts to login with; in a full app you would implement a sane login system.</p>
+
+<form action="/users/login" method="POST">
+  <%== csrf_tag('/users/login') %>
+
+  <% @dummy_emails.each do |dummy_email| %>
+    <button type="submit" name="user[email]" value="<%= dummy_email %>"><%= dummy_email.split('@').first %></button>
+  <% end %>
+
+</form>

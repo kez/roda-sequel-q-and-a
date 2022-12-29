@@ -1,0 +1,40 @@
+<h2>Question: <%= @question.title %></h2>
+
+<h3>On <%= @question.created_at_human %>, <%= @question.user.handle %> asked... </h3>
+
+<blockquote>
+  <%= @question.body %>
+</blockquote>
+
+<hr />
+
+<h3>Answers for this question...</h3>
+<% @answers.each do |answer| %>
+  <%== partial 'answers/answer_in_list', locals: {answer:} %>
+<% end %>
+
+<% if @answers.size.zero? %>
+  <p><i>There are no answers yet - can you help out, below?</i></p>
+<% end %>
+
+<hr />
+
+<h3>Got the answer to this question?</h3>
+<% unless logged_in? %>
+  <p>Please note you will need to be <a href="/users/login">logged in</a> before answering a question.</p>
+<% else %>
+  
+  <p>Use the form below to answer this question.</p>
+  <%# @todo extract this to a partial %>
+  <form action="/answers" method="POST">
+    <%== csrf_tag("/answers") %>
+    <input type="hidden" name="question_nanoid" value="<%= @question.nanoid %>" />
+    <div>
+      <label for="body">Your answer</label>
+      <textarea  name="answer[body]" id="body" placeholder="Your answer here..." required></textarea>
+    </div>
+
+    <button type="submit">Answer Question</button>
+  </form>
+
+<% end %>

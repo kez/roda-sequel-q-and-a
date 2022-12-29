@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/water.min.css" />
+  <title><%= @title || Settings.name %></title>
+</head>
+
+<body>
+  <h1><a href="/">Q&A</a></h1>
+
+  <% flash.each do |flash_type, message| %>
+    <code><%= flash_type %>: <%= message %></code>
+  <% end %>
+
+  <%== yield %>
+
+  <footer>
+    <% if logged_in? %>
+      <a href="/users/logout" class='logout-link'>Logout</a>
+    <% else %>
+      <a href="/users/login" class='login-link'>Login</a>
+    <% end %>
+  </footer>
+</body>
+</html>

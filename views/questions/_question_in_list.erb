@@ -1,0 +1,8 @@
+<li>
+  <a href="/questions/<%= question.nanoid %>">
+    <abbr title="There are <%= question.answers.count %> answers">
+      <%= question.title %>
+    </abbr>
+  </a>
+  <span style='color: grey'>asked by <%= question.user.handle %></span>
+</li>
